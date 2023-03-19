@@ -1,0 +1,83 @@
+﻿@page
+@using Breeze_Soft_Test_Task.Domain;
+
+@model Breeze_Soft_Test_Task.Pages.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Car.Id" />
+            <div class="form-group">
+                <label asp-for="Car.Producer" class="control-label"></label>
+                <input asp-for="Car.Producer" class="form-control" />
+                <span asp-validation-for="Car.Producer" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.Name" class="control-label"></label>
+                <input asp-for="Car.Name" class="form-control" />
+                <span asp-validation-for="Car.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.EnginePower" class="control-label"></label>
+                <input asp-for="Car.EnginePower" class="form-control" />
+                <span asp-validation-for="Car.EnginePower" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Engine type</label>
+                @Html.DropDownListFor(model=>model.Car.Engine, new SelectList(Enum.GetValues(typeof(EngineType))),null,new {@class="form-control"})
+                <span asp-validation-for="Car.Engine" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.AmountOfCylinders" class="control-label"></label>
+                <input asp-for="Car.AmountOfCylinders" class="form-control" />
+                <span asp-validation-for="Car.AmountOfCylinders" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.Color" class="control-label"></label>
+                <input asp-for="Car.Color" class="form-control" />
+                <span asp-validation-for="Car.Color" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Car.ProducedDate" class="control-label"></label>
+                @Html.TextBoxFor(x => x.Car.ProducedDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"})
+                <span asp-validation-for="Car.ProducedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Car.Available" /> @Html.DisplayNameFor(model => model.Car.Available)
+                </label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Photo</label>
+                <input asp-for="ImageFile" type="file" class="form-control" />
+                <input type="submit" value="Upload" asp-page-handler="Upload" class="form-control" />
+            </div>
+            <div>
+                @if(Model.Photo?.Length > 0)
+                {
+                    @Html.HiddenFor(model => model.Photo)
+                    <img src="data:image;base64,@System.Convert.ToBase64String(Model.Photo)" width="420" height="420" />
+                }
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" asp-page-handler="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

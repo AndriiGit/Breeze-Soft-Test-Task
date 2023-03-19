@@ -1,0 +1,80 @@
+﻿@page
+@model Breeze_Soft_Test_Task.Pages.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Producer
+            </th>
+            <th>
+                Model
+            </th>
+            <th>
+                Engine power
+            </th>
+            <th>
+                Engine type
+            </th>
+            <th>
+                Cylinders
+            </th>
+            <th>
+                Color
+            </th>
+            <th>
+                Produced Date
+            </th>
+            <th>
+                Available
+            </th>
+            <th>
+                Photo
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+ @foreach (var item in Model.Cars) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EnginePower)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Engine)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AmountOfCylinders)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Color)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProducedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Available)
+            </td>
+            <td>
+                @if (item.Image?.Length >0)
+                {
+                    <img src="data:image;base64,@System.Convert.ToBase64String(item.Image)" width="80" height="80"/>
+                }
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

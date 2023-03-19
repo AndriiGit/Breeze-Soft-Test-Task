@@ -1,6 +1,4 @@
-# Breeze-Soft-Test-Task
-
-Проект Asp.Net Core Web App с использованием Entity FrameWork
+﻿Проект Asp.Net Core Web App с использованием Entity FrameWork
  - Создать необходимый класс.
  - Создать таблицу базы данных на основе класса.
  - Создать форму для редактирования данных (с валидацией)
